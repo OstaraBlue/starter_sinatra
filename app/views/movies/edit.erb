@@ -1,0 +1,12 @@
+<h1><%= @movie.name %></h1>
+
+<form action="/movies/<%= @movie.id %>" method="POST">
+<input type="hidden" name="_method" value="PUT">
+<label for="name">Name</label>
+<input type="text" name="name" value="<%= @movie.name %>">
+<label for="release_date">Release Date</label>
+<input type="text" name="release_date" value="<%= @movie.release_date %>">
+<label for="genre">Genre</label>
+<input type="text" name="genre" value="<%= @movie.genre %>">
+<input type="submit">
+</form>

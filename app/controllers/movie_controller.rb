@@ -2,6 +2,7 @@ class MovieController < Sinatra::Base
     configure do
      set :public_folder, 'public'
      set :views, 'app/views/movies'
+     set :method_override, true
     end
 
 
@@ -22,7 +23,28 @@ class MovieController < Sinatra::Base
         redirect "/movies/#{movie.id}"
     end
 
-    
+    put '/movies/:id' do 
+        movie = Movie.find(params[:id])
+        movie.update(name: params[:name], release_date: params[:release_date], genre: params[:genre])
+        redirect "/movies/#{movie.id}"
+    end
+
+    get '/movies/:id' do 
+        id = params[:id]
+        @movie = Movie.find(id)
+        erb :show
+    end
+
+    delete '/movies/:id' do 
+        @movie = Movie.find(params[:id])
+        @movie.delete
+        redirect '/movies'
+    end
+
+    get '/movies/:id/edit' do 
+        @movie = Movie.find(params[:id])
+        erb :edit
+    end
 
 
 end
